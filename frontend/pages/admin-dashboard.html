@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TeleHealth - Admin Dashboard</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏥 TeleHealth Admin Dashboard</h1>
+            <div class="nav-buttons">
+                <a href="../index.html" class="btn btn-primary">Patient Portal</a>
+                <button class="btn btn-danger" onclick="app.logout()">Logout</button>
+            </div>
+        </div>
+
+        <div class="search-container">
+            <h3>Search Patients</h3>
+            <div class="search-box">
+                <input type="text" id="searchInput" class="form-control" placeholder="Search by name or email...">
+                <button class="btn btn-primary" onclick="searchPatients()">Search</button>
+                <button class="btn btn-warning" onclick="clearSearch()">Clear</button>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <div style="padding: 1rem; display: flex; justify-content: space-between; align-items: center; background: #f8f9fa;">
+                <h3>All Patients</h3>
+                <span id="patientCount" class="badge">0 patients</span>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Address</th>
+                        <th>Medical History</th>
+                        <th>Medications</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="patientsTableBody">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="../js/app.js"></script>
+    <script>
+        // Check if user is admin
+        if (localStorage.getItem('isAdmin') !== 'true') {
+            window.location.href = 'admin-login.html';
+        }
+
+        function searchPatients() {
+            const searchTerm = document.getElementById('searchInput').value;
+            app.searchPatients(searchTerm);
+        }
+
+        function clearSearch() {
+            document.getElementById('searchInput').value = '';
+            app.loadPatients();
+        }
+
+        // Enhanced table rendering for admin with more details
+        app.renderPatientsTable = function() {
+            const tbody = document.getElementById('patientsTableBody');
+            if (!tbody) return;
+
+            tbody.innerHTML = '';
+            
+            this.patients.forEach(patient => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td><strong>${patient.name}</strong></td>
+                    <td>${patient.email}</td>
+                    <td>${patient.phone || 'N/A'}</td>
+                    <td>${patient.address || 'N/A'}</td>
+                    <td>${patient.medicalHistory ? patient.medicalHistory.substring(0, 50) + '...' : 'N/A'}</td>
+                    <td>${patient.currentMedications ? patient.currentMedications.substring(0, 30) + '...' : 'N/A'}</td>
+                    <td>
+                        <button class="btn btn-primary btn-sm" onclick="viewPatientDetails('${patient.id}')">View</button>
+                        <button class="btn btn-danger btn-sm" onclick="app.deletePatient('${patient.id}')">Delete</button>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+
+            // Update patient count
+            document.getElementById('patientCount').textContent = `${this.patients.length} patients`;
+        };
+
+        function viewPatientDetails(patientId) {
+            const patient = app.patients.find(p => p.id === patientId);
+            if (patient) {
+                alert(`Patient Details:\n\nName: ${patient.name}\nEmail: ${patient.email}\nPhone: ${patient.phone || 'N/A'}\nAddress: ${patient.address || 'N/A'}\n\nMedical History:\n${patient.medicalHistory || 'None'}\n\nCurrent Medications:\n${patient.currentMedications || 'None'}`);
+            }
+        }
+
+        // Search on Enter key
+        document.getElementById('searchInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                searchPatients();
+            }
+        });
+
+        // Load patients on page load
+        window.addEventListener('load', () => {
+            app.loadPatients();
+        });
+    </script>
+</body>
+</html>

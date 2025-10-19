@@ -1,0 +1,15 @@
+C:\Users\Lalit\Desktop\TeleHealth\backend\src\main\java\com\telehealth\TeleHealthApplication.java
+C:\Users\Lalit\Desktop\TeleHealth\backend\src\main\java\com\telehealth\controller\AdminController.java
+C:\Users\Lalit\Desktop\TeleHealth\backend\src\main\java\com\telehealth\service\AdminService.java
+C:\Users\Lalit\Desktop\TeleHealth\backend\src\main\java\com\telehealth\exception\PatientNotFoundException.java
+C:\Users\Lalit\Desktop\TeleHealth\backend\src\main\java\com\telehealth\entity\BaseEntity.java
+C:\Users\Lalit\Desktop\TeleHealth\backend\src\main\java\com\telehealth\entity\Patient.java
+C:\Users\Lalit\Desktop\TeleHealth\backend\src\main\java\com\telehealth\repository\PatientRepository.java
+C:\Users\Lalit\Desktop\TeleHealth\backend\src\main\java\com\telehealth\config\WebConfig.java
+C:\Users\Lalit\Desktop\TeleHealth\backend\src\main\java\com\telehealth\entity\Admin.java
+C:\Users\Lalit\Desktop\TeleHealth\backend\src\main\java\com\telehealth\controller\PatientController.java
+C:\Users\Lalit\Desktop\TeleHealth\backend\src\main\java\com\telehealth\service\PatientService.java
+C:\Users\Lalit\Desktop\TeleHealth\backend\src\main\java\com\telehealth\controller\TestController.java
+C:\Users\Lalit\Desktop\TeleHealth\backend\src\main\java\com\telehealth\exception\GlobalExceptionHandler.java
+C:\Users\Lalit\Desktop\TeleHealth\backend\src\main\java\com\telehealth\repository\AdminRepository.java
+C:\Users\Lalit\Desktop\TeleHealth\backend\src\main\java\com\telehealth\config\DataInitializer.java

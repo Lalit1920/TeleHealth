@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TeleHealth - Patient Portal</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏥 TeleHealth Patient Portal</h1>
+            <div class="nav-buttons">
+                <a href="index.html" class="btn btn-primary">Patient Portal</a>
+                <a href="pages/admin-login.html" class="btn btn-success">Admin Login</a>
+            </div>
+        </div>
+
+        <div class="form-container">
+            <h2 id="formTitle">Add New Patient</h2>
+            <form id="patientForm">
+                <div class="form-group">
+                    <label for="patientName">Full Name *</label>
+                    <input type="text" id="patientName" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="patientEmail">Email *</label>
+                    <input type="email" id="patientEmail" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="patientPhone">Phone Number</label>
+                    <input type="tel" id="patientPhone" class="form-control">
+                </div>
+                
+                <div class="form-group">
+                    <label for="patientAddress">Address</label>
+                    <textarea id="patientAddress" class="form-control" rows="2"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="medicalHistory">Medical History</label>
+                    <textarea id="medicalHistory" class="form-control" rows="3"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="currentMedications">Current Medications</label>
+                    <textarea id="currentMedications" class="form-control" rows="2"></textarea>
+                </div>
+                
+                <button type="submit" id="submitBtn" class="btn btn-primary">Add Patient</button>
+                <button type="button" class="btn btn-warning" onclick="app.resetForm()">Reset</button>
+            </form>
+        </div>
+
+        <div class="table-container">
+            <h3 style="padding: 1rem;">My Patients</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Address</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="patientsTableBody">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script>
+        document.getElementById('patientForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const patientData = {
+                name: document.getElementById('patientName').value,
+                email: document.getElementById('patientEmail').value,
+                phone: document.getElementById('patientPhone').value,
+                address: document.getElementById('patientAddress').value,
+                medicalHistory: document.getElementById('medicalHistory').value,
+                currentMedications: document.getElementById('currentMedications').value
+            };
+            
+            await app.savePatient(patientData);
+        });
+
+        // Load patients on page load
+        window.addEventListener('load', () => {
+            app.loadPatients();
+        });
+    </script>
+</body>
+</html>

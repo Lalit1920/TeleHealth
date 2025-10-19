@@ -1,0 +1,13 @@
+com\telehealth\service\AdminService.class
+com\telehealth\TeleHealthApplication.class
+com\telehealth\exception\PatientNotFoundException.class
+com\telehealth\entity\BaseEntity.class
+com\telehealth\exception\GlobalExceptionHandler.class
+com\telehealth\entity\Admin.class
+com\telehealth\controller\PatientController.class
+com\telehealth\config\WebConfig.class
+com\telehealth\service\PatientService.class
+com\telehealth\entity\Patient.class
+com\telehealth\repository\AdminRepository.class
+com\telehealth\controller\AdminController.class
+com\telehealth\repository\PatientRepository.class
